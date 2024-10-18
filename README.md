@@ -1,8 +1,109 @@
 # pastal
 PASTAL (Phonetic and Semantic Text Analysis Library)
 
-PASTAL is a cutting-edge library designed to analyze, detect, and process text with a focus on phonetic, homophonic, and semantic equivalence. Unlike traditional string matching libraries that rely on exact or near-exact matches, PASTAL enables powerful detection and transformation capabilities, making it ideal for applications where sound-alike or semantically equivalent text needs to be identified and handled. These features make PASTAL a crucial tool in fields like copyright protection, content moderation, adversarial detection, and more.
+PASTAL is a library designed for advanced text tokenization and matching, with an emphasis on phonetic and semantic analysis. This library addresses several real-world use cases like bypassing copyright filters, detecting subtle homophonic manipulations, and improving the accuracy of text matching in contexts like profanity detection.
 
+<details>
+<summary>updated README contents in progress</summary>
+Basic and custom tokenization for flexible text splitting.
+Phonetic and semantic matching to capture subtle variations and meanings in text.
+Batch processing for high-performance analysis of large datasets.
+Customizable thresholds for fine-tuning phonetic and semantic match sensitivity.
+Functional Overview
+1. Basic Tokenization
+Function: basic_tokenize(text: str) -> List[str]
+
+Description: Splits input text into tokens (words) based on common delimiters like spaces and punctuation.
+Use Cases: Simple word boundary detection, standard text tokenization for preprocessing.
+Requirements:
+
+Split text into tokens using spaces and punctuation as delimiters.
+Returns a list of tokens without further analysis (no phonetic or semantic matching).
+2. Custom Tokenization
+Function: custom_tokenize(text: str, split_by: str = " ", normalize: bool = True) -> List[str]
+
+Description: Allows for tokenizing text using a user-specified delimiter and optional normalization (lowercasing, removing special characters).
+Use Cases: Tokenization for non-standard text inputs, customized text preprocessing for specific formats.
+Requirements:
+
+Users can specify a delimiter for splitting text (default: space " ").
+Optional normalization step to prepare text for tokenization (lowercasing, special character removal).
+Returns a list of tokens based on the chosen delimiter.
+3. Tokenization with Phonetic and Semantic Matching
+Function: tokenize_with_phonetics_and_semantics(text: str, phonetic_threshold: float = 0.8, semantic_threshold: Optional[float] = None) -> List[Tuple[str, str, Optional[str]]]
+
+Description: Tokenizes input text and provides phonetic and optional semantic matches for each token.
+Use Cases: Detecting homophones, avoiding common workarounds in copyright detection, detecting euphemisms in profanity filters.
+Requirements:
+
+Tokenizes the input text.
+Finds phonetic matches for each token based on a phonetic similarity threshold.
+Optionally, finds semantic matches if a semantic threshold is provided.
+Returns a list of tuples: (original token, phonetic match, semantic match).
+4. Phonetic and Semantic Matching Without Tokenization
+Function: get_matches(text: str, phonetic_threshold: Optional[float] = None, semantic_threshold: Optional[float] = None) -> List[Tuple[str, Optional[str], Optional[str]]]
+
+Description: Finds phonetic and/or semantic matches for a block of input text without splitting it into tokens.
+Use Cases: Large-text matching tasks, finding paraphrased or homophonic variations in non-tokenized text.
+Requirements:
+
+Accepts a block of text as input.
+Finds phonetic matches based on the phonetic threshold.
+Optionally finds semantic matches if a semantic threshold is provided.
+Returns a list of tuples: (original text, phonetic match, semantic match).
+5. Batch Processing
+Function: batch_process(texts: List[str], mode: str = "tokenize", phonetic_threshold: Optional[float] = None, semantic_threshold: Optional[float] = None) -> List[List[Tuple[str, Optional[str], Optional[str]]]]
+
+Description: Processes a list of texts in batch, applying tokenization and/or matching based on the selected mode (tokenize, phonetic, semantic, both).
+Use Cases: High-performance processing for large datasets, bulk copyright or profanity filtering.
+Requirements:
+
+Processes a list of texts based on the selected mode:
+tokenize: Standard tokenization.
+phonetic: Finds phonetic matches.
+semantic: Finds semantic matches.
+both: Tokenizes and finds both phonetic and semantic matches.
+Allows customizable thresholds for phonetic and/or semantic matching.
+Returns a list of lists, where each sublist contains tuples: (original token, phonetic match, semantic match).
+Potential Use Cases
+Bypassing Copyright Filters: Detecting homophonic workarounds where users submit phonetically similar but non-copyrighted text to bypass detection systems.
+Profanity Filters: Identifying euphemisms and homophones used to evade standard profanity detection algorithms.
+Plagiarism Detection: Detecting paraphrased or semantically similar content in academic or creative works, even if exact wording is changed.
+Text-to-Speech Filtering: Ensuring TTS systems avoid generating restricted content by identifying phonetic or semantic similarities.
+Adversarial Text Analysis: Providing robust defenses against adversarial inputs designed to trick AI models.
+Installation
+You can install PASTAL using pip:
+
+bash
+Copy code
+pip install pastal
+Usage
+Example usage for basic tokenization:
+
+python
+Copy code
+from pastal import basic_tokenize
+
+text = "The quick brown fox jumps over the lazy dog."
+tokens = basic_tokenize(text)
+print(tokens)
+To use phonetic and semantic matching:
+
+python
+Copy code
+from pastal import tokenize_with_phonetics_and_semantics
+
+text = "pastal sounds like pastel"
+matches = tokenize_with_phonetics_and_semantics(text)
+print(matches)
+For batch processing:
+
+```python
+Copy code
+from pastal import batch_process
+```
+
+</details>
 <details open>
 <summary>Features</summary>
 
