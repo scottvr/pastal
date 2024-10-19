@@ -10,6 +10,7 @@ Phonetic and semantic matching to capture subtle variations and meanings in text
 Batch processing for high-performance analysis of large datasets.
 Customizable thresholds for fine-tuning phonetic and semantic match sensitivity.
 Functional Overview
+Package Stucture
 1. Basic Tokenization
 Function: basic_tokenize(text: str) -> List[str]
 
